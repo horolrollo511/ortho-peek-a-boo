@@ -187,10 +187,30 @@ function PreExam() {
               <Row label="Intensity" value={`${intensity} / 10`} />
             </div>
             <button
-              onClick={() => navigate({ to: "/clinics" })}
+              onClick={() => {
+                const id =
+                  "A4F-" +
+                  Math.random().toString(36).slice(2, 6).toUpperCase() +
+                  Math.floor(1000 + Math.random() * 9000);
+                const report = {
+                  id,
+                  createdAt: new Date().toISOString(),
+                  region: regions.find((r) => r.id === region)?.label ?? "—",
+                  pain,
+                  trigger,
+                  duration,
+                  intensity,
+                };
+                try {
+                  sessionStorage.setItem("ortholens.lastReport", JSON.stringify(report));
+                } catch {
+                  // ignore quota / privacy mode failures
+                }
+                navigate({ to: "/report-sent" });
+              }}
               className="mt-8 w-full h-12 rounded-full bg-primary text-primary-foreground font-medium shadow-soft hover:shadow-elevated transition inline-flex items-center justify-center gap-2"
             >
-              <Check className="size-4" /> Submit & find a clinic
+              <Check className="size-4" /> Send to clinic & generate report
             </button>
           </StepShell>
         )}
