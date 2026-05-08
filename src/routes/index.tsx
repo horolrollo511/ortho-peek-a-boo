@@ -1,26 +1,45 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Header } from "@/components/Header";
+import { Hero } from "@/components/Hero";
+import { HowItWorks } from "@/components/HowItWorks";
+import { BodyMap } from "@/components/BodyMap";
+import { ReportPreview } from "@/components/ReportPreview";
+import { Trust } from "@/components/Trust";
+import { CTA } from "@/components/CTA";
+import { Footer } from "@/components/Footer";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Ortholens — Visualized Orthopedic Pre-Examination" },
+      {
+        name: "description",
+        content:
+          "A 7-minute interactive pre-exam for orthopedic patients. Map your pain, capture motion, and arrive at your appointment with a clinician-ready visual report.",
+      },
+      { property: "og:title", content: "Ortholens — Visualized Orthopedic Pre-Examination" },
+      {
+        property: "og:description",
+        content: "Tap where it hurts. Arrive understood. Visual pre-exams for modern orthopedic care.",
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
+function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background text-foreground antialiased">
+      <Header />
+      <main>
+        <Hero />
+        <HowItWorks />
+        <BodyMap />
+        <ReportPreview />
+        <Trust />
+        <CTA />
+      </main>
+      <Footer />
     </div>
   );
-}
-
-function Index() {
-  return <PlaceholderIndex />;
 }
