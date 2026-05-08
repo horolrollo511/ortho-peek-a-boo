@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import skeleton from "@/assets/skeleton-hero.png";
 
 export function Hero() {
@@ -23,12 +24,18 @@ export function Hero() {
             report — so the consultation starts where it matters.
           </p>
           <div className="flex flex-wrap gap-3">
-            <button className="h-12 px-6 rounded-full bg-primary text-primary-foreground font-medium shadow-soft hover:shadow-elevated transition">
+            <Link
+              to="/pre-exam"
+              className="h-12 px-6 rounded-full bg-primary text-primary-foreground font-medium shadow-soft hover:shadow-elevated transition inline-flex items-center"
+            >
               Start free pre-exam
-            </button>
-            <button className="h-12 px-6 rounded-full border border-border bg-card text-foreground font-medium hover:bg-muted transition">
+            </Link>
+            <Link
+              to="/demo"
+              className="h-12 px-6 rounded-full border border-border bg-card text-foreground font-medium hover:bg-muted transition inline-flex items-center"
+            >
               Watch 60-sec demo
-            </button>
+            </Link>
           </div>
           <dl className="flex gap-10 pt-4">
             {[

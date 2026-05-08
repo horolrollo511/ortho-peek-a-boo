@@ -17,9 +17,12 @@ export function Header() {
           <a href="#trust" className="hover:text-foreground transition">Clinicians</a>
           <a href="#faq" className="hover:text-foreground transition">FAQ</a>
         </nav>
-        <button className="inline-flex h-10 items-center rounded-full bg-foreground text-background px-5 text-sm font-medium hover:opacity-90 transition">
+        <Link
+          to="/pre-exam"
+          className="inline-flex h-10 items-center rounded-full bg-foreground text-background px-5 text-sm font-medium hover:opacity-90 transition"
+        >
           Begin pre-exam
-        </button>
+        </Link>
       </div>
     </header>
   );

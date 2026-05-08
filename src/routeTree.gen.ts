@@ -9,8 +9,26 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PreExamRouteImport } from './routes/pre-exam'
+import { Route as DemoRouteImport } from './routes/demo'
+import { Route as ClinicsRouteImport } from './routes/clinics'
 import { Route as IndexRouteImport } from './routes/index'
 
+const PreExamRoute = PreExamRouteImport.update({
+  id: '/pre-exam',
+  path: '/pre-exam',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoRoute = DemoRouteImport.update({
+  id: '/demo',
+  path: '/demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClinicsRoute = ClinicsRouteImport.update({
+  id: '/clinics',
+  path: '/clinics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +37,61 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/clinics': typeof ClinicsRoute
+  '/demo': typeof DemoRoute
+  '/pre-exam': typeof PreExamRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/clinics': typeof ClinicsRoute
+  '/demo': typeof DemoRoute
+  '/pre-exam': typeof PreExamRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/clinics': typeof ClinicsRoute
+  '/demo': typeof DemoRoute
+  '/pre-exam': typeof PreExamRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/clinics' | '/demo' | '/pre-exam'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/clinics' | '/demo' | '/pre-exam'
+  id: '__root__' | '/' | '/clinics' | '/demo' | '/pre-exam'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ClinicsRoute: typeof ClinicsRoute
+  DemoRoute: typeof DemoRoute
+  PreExamRoute: typeof PreExamRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/pre-exam': {
+      id: '/pre-exam'
+      path: '/pre-exam'
+      fullPath: '/pre-exam'
+      preLoaderRoute: typeof PreExamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo': {
+      id: '/demo'
+      path: '/demo'
+      fullPath: '/demo'
+      preLoaderRoute: typeof DemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clinics': {
+      id: '/clinics'
+      path: '/clinics'
+      fullPath: '/clinics'
+      preLoaderRoute: typeof ClinicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +104,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ClinicsRoute: ClinicsRoute,
+  DemoRoute: DemoRoute,
+  PreExamRoute: PreExamRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

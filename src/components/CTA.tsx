@@ -1,3 +1,5 @@
+import { Link } from "@tanstack/react-router";
+
 export function CTA() {
   return (
     <section className="py-24">
@@ -16,12 +18,18 @@ export function CTA() {
               our 320+ partner clinics.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <button className="h-12 px-6 rounded-full bg-background text-foreground font-medium hover:opacity-90 transition">
+              <Link
+                to="/pre-exam"
+                className="h-12 px-6 rounded-full bg-background text-foreground font-medium hover:opacity-90 transition inline-flex items-center"
+              >
                 Start pre-exam
-              </button>
-              <button className="h-12 px-6 rounded-full border border-background/20 text-background hover:bg-background/10 transition">
+              </Link>
+              <Link
+                to="/clinics"
+                className="h-12 px-6 rounded-full border border-background/20 text-background hover:bg-background/10 transition inline-flex items-center"
+              >
                 Find a clinic
-              </button>
+              </Link>
             </div>
           </div>
         </div>
