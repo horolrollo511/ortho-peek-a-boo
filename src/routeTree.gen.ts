@@ -9,11 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ReportSentRouteImport } from './routes/report-sent'
 import { Route as PreExamRouteImport } from './routes/pre-exam'
 import { Route as DemoRouteImport } from './routes/demo'
 import { Route as ClinicsRouteImport } from './routes/clinics'
 import { Route as IndexRouteImport } from './routes/index'
 
+const ReportSentRoute = ReportSentRouteImport.update({
+  id: '/report-sent',
+  path: '/report-sent',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PreExamRoute = PreExamRouteImport.update({
   id: '/pre-exam',
   path: '/pre-exam',
@@ -40,12 +46,14 @@ export interface FileRoutesByFullPath {
   '/clinics': typeof ClinicsRoute
   '/demo': typeof DemoRoute
   '/pre-exam': typeof PreExamRoute
+  '/report-sent': typeof ReportSentRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/clinics': typeof ClinicsRoute
   '/demo': typeof DemoRoute
   '/pre-exam': typeof PreExamRoute
+  '/report-sent': typeof ReportSentRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,14 @@ export interface FileRoutesById {
   '/clinics': typeof ClinicsRoute
   '/demo': typeof DemoRoute
   '/pre-exam': typeof PreExamRoute
+  '/report-sent': typeof ReportSentRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/clinics' | '/demo' | '/pre-exam'
+  fullPaths: '/' | '/clinics' | '/demo' | '/pre-exam' | '/report-sent'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/clinics' | '/demo' | '/pre-exam'
-  id: '__root__' | '/' | '/clinics' | '/demo' | '/pre-exam'
+  to: '/' | '/clinics' | '/demo' | '/pre-exam' | '/report-sent'
+  id: '__root__' | '/' | '/clinics' | '/demo' | '/pre-exam' | '/report-sent'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,10 +76,18 @@ export interface RootRouteChildren {
   ClinicsRoute: typeof ClinicsRoute
   DemoRoute: typeof DemoRoute
   PreExamRoute: typeof PreExamRoute
+  ReportSentRoute: typeof ReportSentRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/report-sent': {
+      id: '/report-sent'
+      path: '/report-sent'
+      fullPath: '/report-sent'
+      preLoaderRoute: typeof ReportSentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/pre-exam': {
       id: '/pre-exam'
       path: '/pre-exam'
@@ -107,6 +124,7 @@ const rootRouteChildren: RootRouteChildren = {
   ClinicsRoute: ClinicsRoute,
   DemoRoute: DemoRoute,
   PreExamRoute: PreExamRoute,
+  ReportSentRoute: ReportSentRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
